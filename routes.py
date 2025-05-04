@@ -10,23 +10,30 @@ def init_routes(app):
     
     @app.route('/login', methods=['GET', 'POST'])
     def login():
+        if current_user.is_authenticated:
+            return redirect(url_for('dashboard'))
         if request.method == 'POST':
             data = request.get_json()
             username = data.get('username')
             password = data.get('password')
-            
+            print('Username:', username)
+            print('Password:', password)
             user = User.query.filter_by(username=username).first()
-            
+            print('User:', user)
+            if user:
+                print('User password hash:', user.password)
+                print('Check password:', check_password_hash(user.password, password))
             if user and check_password_hash(user.password, password):
                 login_user(user)
                 return jsonify({'success': True, 'redirect': url_for('dashboard')})
-            
             return jsonify({'success': False, 'message': 'Invalid username or password'})
         
         return render_template('login.html')
     
     @app.route('/register', methods=['GET', 'POST'])
     def register():
+        if current_user.is_authenticated:
+            return redirect(url_for('dashboard'))
         if request.method == 'POST':
             data = request.get_json()
             username = data.get('username')

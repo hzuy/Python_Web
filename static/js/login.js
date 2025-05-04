@@ -15,7 +15,11 @@ new Vue({
         .post("/login", this.form)
         .then((response) => {
           if (response.data.success) {
-            window.location.href = response.data.redirect;
+            this.message = "Đăng nhập thành công";
+            this.messageType = "alert-success";
+            setTimeout(() => {
+              window.location.href = response.data.redirect;
+            }, 1500);
           } else {
             this.message = response.data.message;
             this.messageType = "alert-error";

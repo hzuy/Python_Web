@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <div id="app">
-        {% block content %}{% endblock %}
-    </div>
+  </head>
+  <body>
+    {% if current_user.is_authenticated %}
+    <nav class="main-menu">
+      <div class="logo">SoccerShop</div>
+      <ul>
+        <li><a href="/dashboard">Trang chủ</a></li>
+        <li><a href="#">Sản phẩm</a></li>
+        <li><a href="#">Áo đấu CLB</a></li>
+        <li><a href="#">Áo đấu ĐTQG</a></li>
+        <li><a href="#">Phụ kiện</a></li>
+        <li><a href="#">Liên hệ</a></li>
+        <li style="float: right"><a href="/logout">Đăng xuất</a></li>
+      </ul>
+    </nav>
+    {% endif %}
+    <div id="app">{% block content %}{% endblock %}</div>
     {% block scripts %}{% endblock %}
-</body>
+  </body>
 </html>

@@ -1,20 +1,19 @@
-{% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block
+content %}
 <div class="dashboard-container">
-    <h2>Welcome, ${ user.username }!</h2>
-    <p>Email: ${ user.email }</p>
-    <p>Member since: ${ user.created_at }</p>
-    <button @click="logout" class="logout-btn">Logout</button>
+  <h2>Welcome, {{ user.username }}!</h2>
+  <p>Email: {{ user.email }}</p>
+  <p>Member since: {{ user.created_at.strftime('%d/%m/%Y') }}</p>
+  <button @click="logout" class="logout-btn">Logout</button>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
-    const userData = {{ current_user|tojson|safe }};
-    // Convert Python datetime to JS format
-    userData.created_at = new Date(userData.created_at).toLocaleDateString();
+  const userData = {
+    username: "{{ user.username }}",
+    email: "{{ user.email }}",
+    created_at: "{{ user.created_at }}",
+  };
+  userData.created_at = new Date(userData.created_at).toLocaleDateString();
 </script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}
