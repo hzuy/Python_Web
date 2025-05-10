@@ -5,24 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
     <link
+      rel="icon"
+      type="image/jpeg"
+      href="{{ url_for('static', filename='favicon_io/hzuyshop.jpg') }}"
+    />
+    <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/styles.css') }}"
     />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ url_for('static', filename='favicon_io/apple-touch-icon.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{ url_for('static', filename='favicon_io/favicon-16x16.png') }}"
+    />
+    <link
+      rel="manifest"
+      href="{{ url_for('static', filename='favicon_io/site.webmanifest') }}"
+    />
   </head>
   <body>
     {% if current_user.is_authenticated %}
     <nav class="main-menu">
-      <div class="logo">SoccerShop</div>
+      <a class="logo" href="/dashboard">HzuyShop</a>
+      <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
       <ul>
         <li><a href="/dashboard">Trang chủ</a></li>
-        <li><a href="#">Sản phẩm</a></li>
         <li><a href="#">Áo đấu CLB</a></li>
         <li><a href="#">Áo đấu ĐTQG</a></li>
+        <li><a href="#">Giày đá bóng</a></li>
         <li><a href="#">Phụ kiện</a></li>
+        <li><a href="#">Danh mục khác</a></li>
         <li><a href="#">Liên hệ</a></li>
-        <li style="float: right"><a href="/logout">Đăng xuất</a></li>
+        <li><a href="#">Chi nhánh</a></li>
+        <li class="cart">
+          <a href="#"><i class="fas fa-shopping-cart"></i> Giỏ Hàng</a>
+        </li>
+        <li class="logout"><a href="/logout">Đăng xuất</a></li>
       </ul>
     </nav>
     {% endif %}
